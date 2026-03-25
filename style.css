@@ -1,0 +1,50 @@
+body {
+    background-color: black;
+    margin: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Arial', sans-serif;
+}
+
+#text-container {
+    color: #ff0000;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
+}
+
+.fade-in {
+    animation: fadeInOut 2.5s forwards;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.1); }
+}
+
+#image-heart {
+    display: grid;
+    grid-template-columns: repeat(2, 120px);
+    gap: 10px;
+    animation: heartPop 1s ease-out forwards;
+}
+
+.heart-img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid #ff0000;
+}
+
+.hidden { display: none; }
+
+@keyframes heartPop {
+    0% { transform: scale(0); rotate: 45deg; }
+    100% { transform: scale(1); rotate: 0deg; }
+}

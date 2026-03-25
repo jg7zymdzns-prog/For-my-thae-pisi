@@ -4,28 +4,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For My Thae</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-color: #000;
+            color: #ff6b81;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            text-align: center;
+        }
+        .message {
+            font-size: 2.5rem;
+            display: none;
+            position: absolute;
+            width: 100%;
+            animation: fadeInOut 2s ease-in-out forwards;
+        }
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.1); }
+            100% { opacity: 0; transform: scale(1.2); }
+        }
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 1s ease-in;
+        }
+        .photo {
+            width: 140px;
+            height: 140px;
+            object-fit: cover;
+            border: 3px solid #ff6b81;
+            border-radius: 15px;
+        }
+        .visible { opacity: 1 !important; display: grid !important; }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <div id="text-animation">
-            <h1 class="message">I'm</h1>
-            <h1 class="message">Truly</h1>
-            <h1 class="message">Sorry</h1>
-            <h1 class="message">My</h1>
-            <h1 class="message">Thae"</h1>
-            <h1 class="message">Pisi ly</h1>
-        </div>
-        
-        <div id="photo-album" class="hidden">
-            <div class="photo-grid">
-                <img src="img1.jpg" class="photo">
-                <img src="img2.jpg" class="photo">
-                <img src="img3.jpg" class="photo">
-                <img src="img4.jpg" class="photo">
-            </div>
-        </div>
+
+    <div id="text-container">
+        <h1 class="message">I'm</h1>
+        <h1 class="message">Truly</h1>
+        <h1 class="message">Sorry</h1>
+        <h1 class="message">My</h1>
+        <h1 class="message">Thae"</h1>
+        <h1 class="message">Pisi ly</h1>
     </div>
-    <script src="script.js"></script>
+
+    <div id="photo-album" class="photo-grid" style="display:none;">
+        <img src="img1.jpg" class="photo">
+        <img src="img2.jpg" class="photo">
+        <img src="img3.jpg" class="photo">
+        <img src="img4.jpg" class="photo">
+    </div>
+
+    <script>
+        const messages = document.querySelectorAll('.message');
+        const album = document.getElementById('photo-album');
+        const textContainer = document.getElementById('text-container');
+        let delay = 0;
+
+        messages.forEach((msg, index) => {
+            setTimeout(() => {
+                msg.style.display = 'block';
+                setTimeout(() => {
+                    msg.style.display = 'none';
+                    // နောက်ဆုံးစာသားပြီးရင် ပုံတွေပြမယ်
+                    if (index === messages.length - 1) {
+                        textContainer.style.display = 'none';
+                        album.style.display = 'grid';
+                        setTimeout(() => album.style.opacity = '1', 100);
+                    }
+                }, 1900);
+            }, delay);
+            delay += 2000;
+        });
+    </script>
 </body>
 </html>

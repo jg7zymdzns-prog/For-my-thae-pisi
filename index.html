@@ -15,7 +15,7 @@
             align-items: center;
             height: 100vh;
             color: #ff6b81;
-            /* NEW POST Style Serif Font */
+            /* Classic NEW POST style serif font */
             font-family: 'Cinzel', serif;
         }
         canvas { position: absolute; top: 0; left: 0; z-index: 0; }
@@ -38,21 +38,44 @@
             100% { transform: scale(1); }
         }
         .message {
-            font-size: 5rem; /* Classic စာလုံးအတွက် နည်းနည်းပိုကြီးမယ် */
+            font-size: 5rem;
             display: none;
             position: absolute;
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
             width: 100vw;
-            text-shadow: 0 0 20px rgba(255, 107, 129, 0.9);
-            animation: fadeInOut Classic 2s ease-in-out forwards;
+            text-shadow: 0 0 25px rgba(255, 107, 129, 1);
+            /* Squeeze & Pulse Animation effect */
+            animation: fadeInSqueeze 2.2s ease-in-out forwards;
         }
-        @keyframes fadeInOutClassic {
-            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); filter: blur(10px); }
-            50% { opacity: 1; transform: translate(-50%, -50%) scale(1); filter: blur(0); }
-            100% { opacity: 0; transform: translate(-50%, -50%) scale(1.2); filter: blur(10px); }
+
+        /* ပိုပြီး သက်ဝင်လှုပ်ရှားတဲ့ Squeeze & Fade effect */
+        @keyframes fadeInSqueeze {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.6, 1.4); /* Squeezed vertically */
+                filter: blur(15px);
+            }
+            25% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.1, 0.9); /* Popped out, squeezed horizontally */
+                filter: blur(0);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(0.95, 1.05); /* Gentle pulse */
+            }
+            75% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.05, 0.95); /* Popped again */
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(1.3, 1.3); /* Fade out with zoom */
+                filter: blur(15px);
+            }
         }
+
         .photo-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -145,9 +168,9 @@
                             album.classList.remove('hidden');
                             setTimeout(() => album.style.opacity = '1', 100);
                         }
-                    }, 1900);
+                    }, 2100); // Squeeze effect အတွက် အချိန်နည်းနည်းပိုပေးမယ်
                 }, delay);
-                delay += 2000;
+                delay += 2200; // Squeeze effect ကြာချိန်နဲ့ ကိုက်ညီအောင် ပြင်မယ်
             });
         });
     </script>

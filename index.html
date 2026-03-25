@@ -16,19 +16,42 @@
             height: 100vh;
             overflow: hidden;
             text-align: center;
+            position: relative;
         }
+
+        /* နှလုံးသားလေးတွေအတွက် style */
+        .heart {
+            position: absolute;
+            color: #ff6b81;
+            font-size: 20px;
+            top: -10%;
+            z-index: 0;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+
+        .container { z-index: 1; position: relative; }
+
         .message {
             font-size: 2.5rem;
             display: none;
             position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
             width: 100%;
             animation: fadeInOut 2s ease-in-out forwards;
         }
+
         @keyframes fadeInOut {
-            0% { opacity: 0; transform: scale(0.8); }
-            50% { opacity: 1; transform: scale(1.1); }
-            100% { opacity: 0; transform: scale(1.2); }
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
         }
+
         .photo-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -37,6 +60,7 @@
             opacity: 0;
             transition: opacity 1s ease-in;
         }
+
         .photo {
             width: 140px;
             height: 140px;
@@ -44,7 +68,6 @@
             border: 3px solid #ff6b81;
             border-radius: 15px;
         }
-        .visible { opacity: 1 !important; display: grid !important; }
     </style>
 </head>
 <body>
@@ -66,6 +89,19 @@
     </div>
 
     <script>
+        // နှလုံးသားလေးတွေ ဖန်တီးပေးတဲ့ function
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            heart.style.opacity = Math.random();
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+        setInterval(createHeart, 300);
+
         const messages = document.querySelectorAll('.message');
         const album = document.getElementById('photo-album');
         const textContainer = document.getElementById('text-container');
@@ -76,7 +112,6 @@
                 msg.style.display = 'block';
                 setTimeout(() => {
                     msg.style.display = 'none';
-                    // နောက်ဆုံးစာသားပြီးရင် ပုံတွေပြမယ်
                     if (index === messages.length - 1) {
                         textContainer.style.display = 'none';
                         album.style.display = 'grid';

@@ -95,7 +95,7 @@
     </div>
 
     <script>
-        // Matrix Hearts
+        // Matrix Hearts Animation
         const canvas = document.getElementById('matrix');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
@@ -120,21 +120,19 @@
         }
         setInterval(drawMatrix, 33);
 
-        // Music & Animation
+        // Music & Animation Control
         const startBtn = document.getElementById('start-btn');
         const messages = document.querySelectorAll('.message');
         const album = document.getElementById('photo-album');
         const textContainer = document.getElementById('text-container');
-
-        // သီချင်းကို JavaScript ထဲကနေ တိုက်ရိုက်ခေါ်မယ်
         const song = new Audio('song.mp3'); 
 
         startBtn.addEventListener('click', () => {
             startBtn.classList.add('hidden');
             textContainer.classList.remove('hidden');
 
-            // သီချင်းကို ၄၃ စက္ကန့်ကနေ စဖွင့်မယ်
-            song.currentTime = 43;
+            // သီချင်းကို အစကနေ (0 စက္ကန့်ကနေ) ဖွင့်မယ်
+            song.currentTime = 0; 
             song.play().catch(e => console.log("Music play failed:", e));
 
             let delay = 0;

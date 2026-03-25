@@ -19,13 +19,14 @@
             position: relative;
         }
 
-        /* နှလုံးသားလေးတွေအတွက် style */
+        /* နှလုံးသားလေးတွေအတွက် style - အရေအတွက် ပိုများလာအောင် ပြင်ထားတယ် */
         .heart {
             position: absolute;
-            color: #ff6b81;
+            color: #ff4757;
             font-size: 20px;
             top: -10%;
             z-index: 0;
+            pointer-events: none;
             animation: fall linear forwards;
         }
 
@@ -33,16 +34,18 @@
             to { transform: translateY(110vh) rotate(360deg); }
         }
 
-        .container { z-index: 1; position: relative; }
+        .container { z-index: 2; position: relative; }
 
         .message {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             display: none;
             position: absolute;
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
             width: 100%;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(255, 107, 129, 0.5);
             animation: fadeInOut 2s ease-in-out forwards;
         }
 
@@ -67,10 +70,25 @@
             object-fit: cover;
             border: 3px solid #ff6b81;
             border-radius: 15px;
+            box-shadow: 0 0 15px rgba(255, 107, 129, 0.3);
+        }
+
+        /* YouTube သီချင်းကို ဖျောက်ထားဖို့ */
+        #music-player {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border: 0;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
+
+    <iframe id="music-player" 
+        src="https://www.youtube.com/embed/fA_Gf8z24yM?autoplay=1&start=43" 
+        allow="autoplay">
+    </iframe>
 
     <div id="text-container">
         <h1 class="message">I'm</h1>
@@ -89,18 +107,21 @@
     </div>
 
     <script>
-        // နှလုံးသားလေးတွေ ဖန်တီးပေးတဲ့ function
+        // နှလုံးသားလေးတွေ ပိုများလာအောင် setInterval ကို 150ms (အရင်ကထက် ၂ ဆမြန်) လုပ်ထားတယ်
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('heart');
-            heart.innerHTML = '❤️';
+            // အသဲပုံစံအမျိုးမျိုး ရောထည့်ထားတယ်
+            const heartTypes = ['❤️', '💖', '💗', '💕'];
+            heart.innerHTML = heartTypes[Math.floor(Math.random() * heartTypes.length)];
             heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
-            heart.style.opacity = Math.random();
+            heart.style.fontSize = Math.random() * 20 + 15 + 'px';
+            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+            heart.style.opacity = Math.random() * 0.8 + 0.2;
             document.body.appendChild(heart);
             setTimeout(() => heart.remove(), 5000);
         }
-        setInterval(createHeart, 300);
+        setInterval(createHeart, 150); 
 
         const messages = document.querySelectorAll('.message');
         const album = document.getElementById('photo-album');

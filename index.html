@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For My Thae</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Pacifico&display=swap" rel="stylesheet">
     <style>
         body {
             background-color: #000;
@@ -15,7 +15,8 @@
             align-items: center;
             height: 100vh;
             color: #ff6b81;
-            font-family: 'Dancing Script', cursive;
+            /* NEW POST Style Serif Font */
+            font-family: 'Cinzel', serif;
         }
         canvas { position: absolute; top: 0; left: 0; z-index: 0; }
         .container { position: relative; z-index: 2; text-align: center; }
@@ -37,7 +38,7 @@
             100% { transform: scale(1); }
         }
         .message {
-            font-size: 4.5rem;
+            font-size: 5rem; /* Classic စာလုံးအတွက် နည်းနည်းပိုကြီးမယ် */
             display: none;
             position: absolute;
             left: 50%;
@@ -45,12 +46,12 @@
             transform: translate(-50%, -50%);
             width: 100vw;
             text-shadow: 0 0 20px rgba(255, 107, 129, 0.9);
-            animation: fadeInOut 2s ease-in-out forwards;
+            animation: fadeInOut Classic 2s ease-in-out forwards;
         }
-        @keyframes fadeInOut {
-            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); filter: blur(10px); }
-            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); filter: blur(0); }
-            100% { opacity: 0; transform: translate(-50%, -50%) scale(1.4); filter: blur(10px); }
+        @keyframes fadeInOutClassic {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); filter: blur(10px); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1); filter: blur(0); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1.2); filter: blur(10px); }
         }
         .photo-grid {
             display: grid;
@@ -130,8 +131,6 @@
         startBtn.addEventListener('click', () => {
             startBtn.classList.add('hidden');
             textContainer.classList.remove('hidden');
-
-            // သီချင်းကို အစကနေ (0 စက္ကန့်ကနေ) ဖွင့်မယ်
             song.currentTime = 0; 
             song.play().catch(e => console.log("Music play failed:", e));
 
